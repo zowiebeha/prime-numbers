@@ -169,7 +169,7 @@
             
             // What are the accessibility implications of this?
             // Well it is invisible, so probably none.
-            clonedElement.style.cssText = 'position:static;top:0;left:0;overflow:auto;visibility:hidden;pointer-events:none;width:fit-content;min-width:unset;max-width:unset;height:auto;min-height:unset;max-height:unset;'
+            clonedElement.style.cssText = 'position:static;top:0;left:0;overflow:auto;visibility:hidden;pointer-events:none;width:fit-content;min-width:unset;max-width:unset;height:fit-content;min-height:unset;max-height:unset;'
 
             mainElement.append(clonedElement);
             
@@ -177,7 +177,7 @@
             
             clonedElement.remove();
             
-            return [Math.round(rect.width), Math.round(rect.height)];
+            return [rect.width, rect.height];
         };
 
         formElement.addEventListener('submit', (event) => {            
