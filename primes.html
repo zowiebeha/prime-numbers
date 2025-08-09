@@ -90,8 +90,8 @@
 
         #prime-output {
             border: 1px dashed var(--orange);
-            width: fit-content;
-            height: fit-content;
+            width: 0px;
+            height: 0px;
             padding: 1rem 2rem;
 
             interpolate-size: allow-keywords; 
@@ -124,7 +124,11 @@
         }
         
         .fadeout {
-            animation: .6s fade-out 1 forwards;
+            animation: .6s fade-out 1;
+        }
+        
+        .inline {
+            display: inline;
         }
         
         @keyframes fade-out {
@@ -177,8 +181,9 @@
          * clone if height were set to auto and width set to 100%.
          * @param {HTMLElement} element
          */
-        function getFinalSize(element) {
+        function getFinalSize(element, textContent) {
             const clonedElement = element.cloneNode(true);
+            clonedElement.textContent = textContent;
             clonedElement.classList.remove('prime-output--hidden');
             
             // What are the accessibility implications of this?
@@ -226,35 +231,36 @@
                 primes.push(primeToCheck)
             }
             
-            // Fade out extra integers that aren't a part of the new input
-            // will need to discount them from the width calculation...
-            // we can pass an output element with only the correct text to getFinalSize,
-            // then keep the text within the element shown!!!! yes!!
-            // asdasdpizza
-            // asdasd
-            // how do i retrieve text content without the span?
-            
-            // Update text with primes
             const newPrimeString = primes.join(', ');
-            outputElement.textContent = newPrimeString;
-            
-            const [width, height] = getFinalSize(outputElement);
-            outputElement.style.height = "0px";
-            outputElement.style.width = "0px";
-            
             const oldPrimeString = outputElement.textContent;
+            let fadeOutSpanElement;
+            
+            debugger;
+            
             // Check that we had non-empty output
             if (oldPrimeString) {
                 const removedText = oldPrimeString.substring(newPrimeString.length - 1);
-                const fadeOutSpanElement = document.createElement('span');
+                fadeOutSpanElement = document.createElement('span');
                 fadeOutSpanElement.textContent = removedText;
-                fadeOutSpanElement.classList.add('fadeout');
+                fadeOutSpanElement.classList.add('fadeout', 'inline');
                 fadeOutSpanElement.addEventListener('animationend', (event) => {
                     event.target.remove(); // garbage collect
                 })
             }
             
-            // Show output
+            // flicker issue
+            // issue with fadeOutSpanElement's position...
+            
+            // Obtain dimensions with new prime string
+            const [width, height] = getFinalSize(outputElement, newPrimeString);
+            
+            outputElement.textContent = ''; // Reset
+            const newOutputText = document.createElement('span');
+            newOutputText.textContent = newPrimeString;
+            newOutputText.classList.add('inline');
+            outputElement.append(newOutputText, fadeOutSpanElement ?? '')
+            
+            // Show output if it's hidden (if there was previously no input provided)
             outputElement.classList.remove('prime-output--hidden');
             
             // Trigger height animation to accomodate text
