@@ -1,0 +1,4 @@
+* Improve code quality via review and better JSDocs
+
+* Give it the webpack treatment
+    - (Minification, Mangling)
