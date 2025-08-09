@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 100%;
+}
+
+*::selection {
+    background: var(--orange);
+    color: var(--black);
+}
+
+:root {
+    --black: hsl(40, 100%, 2%);
+    --orange: orange;
+}
+
+body {
+    margin: 1rem;
+    background: var(--black);
+}
+
+p,
+input,
+label,
+h1,
+h2 {
+    font-family: "Mozilla Headline", Sans-Serif;
+    color: var(--orange);
+}
+
+label {
+    cursor: text;
+}
+
+main {
+    /* width of longest sentence ("This site will generate...") */
+    max-width: 42.5rem;
+}
+
+.heading {
+    color: var(--orange);
+    background: hsl(40, 100%, 16%);
+    width: fit-content;
+    padding: .5rem 1rem;
+}
+
+.form__input {
+    border: 1px dashed var(--orange);
+    background-color: var(--black);
+    width: 8rem;
+    height: 1rem;
+    padding: 1rem;
+
+    position: relative;
+    top: .5rem;
+    left: .5rem;
+
+    /* Hide browser default spinner controls */
+    appearance: textfield;
+
+    font-size: 1rem;
+
+    transition: .6s ease-out box-shadow;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 8px hsl(from var(--orange) h s l / 32%);
+    }
+
+    /* Hide browser default spinner controls */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        appearance: none;
+    }
+}
+
+#prime-output {
+    border: 1px dashed var(--orange);
+    width: 0px;
+    height: 0px;
+    padding: 1rem 2rem;
+
+    interpolate-size: allow-keywords; 
+    transition: .6s border-color, .6s color, .8s display, .8s text-shadow, .8s width, .8s height, .8s width;
+    transition-behavior: allow-discrete;
+    border-color: var(--orange);
+    text-shadow: 0 0 6px var(--orange);
+    overflow: hidden;
+
+    @starting-style {
+        border-color: transparent;
+        color: transparent;
+        text-shadow: 0 0 0 transparent;
+    }
+    
+    &.prime-output--hidden {
+        border-color: transparent;
+        color: transparent;
+        display: none;
+        text-shadow: 0 0 0 transparent;
+    }
+}
+
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.fadeout {
+    animation: .6s fade-out 1;
+}
+
+.inline {
+    display: inline;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        display: none;
+    }
+}
