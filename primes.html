@@ -122,6 +122,20 @@
         .mt-2 {
             margin-top: 2rem;
         }
+        
+        .fadeout {
+            animation: .6s fade-out 1 forwards;
+        }
+        
+        @keyframes fade-out {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                display: none;
+            }
+        }
     </style>
 </head>
 
@@ -212,12 +226,33 @@
                 primes.push(primeToCheck)
             }
             
+            // Fade out extra integers that aren't a part of the new input
+            // will need to discount them from the width calculation...
+            // we can pass an output element with only the correct text to getFinalSize,
+            // then keep the text within the element shown!!!! yes!!
+            // asdasdpizza
+            // asdasd
+            // how do i retrieve text content without the span?
+            
             // Update text with primes
-            outputElement.textContent = primes.join(', ');
+            const newPrimeString = primes.join(', ');
+            outputElement.textContent = newPrimeString;
             
             const [width, height] = getFinalSize(outputElement);
             outputElement.style.height = "0px";
             outputElement.style.width = "0px";
+            
+            const oldPrimeString = outputElement.textContent;
+            // Check that we had non-empty output
+            if (oldPrimeString) {
+                const removedText = oldPrimeString.substring(newPrimeString.length - 1);
+                const fadeOutSpanElement = document.createElement('span');
+                fadeOutSpanElement.textContent = removedText;
+                fadeOutSpanElement.classList.add('fadeout');
+                fadeOutSpanElement.addEventListener('animationend', (event) => {
+                    event.target.remove(); // garbage collect
+                })
+            }
             
             // Show output
             outputElement.classList.remove('prime-output--hidden');
