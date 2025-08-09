@@ -235,11 +235,9 @@
             const oldPrimeString = outputElement.textContent;
             let fadeOutSpanElement;
             
-            debugger;
-            
             // Check that we had non-empty output
             if (oldPrimeString) {
-                const removedText = oldPrimeString.substring(newPrimeString.length - 1);
+                const removedText = oldPrimeString.substring(newPrimeString.length);
                 fadeOutSpanElement = document.createElement('span');
                 fadeOutSpanElement.textContent = removedText;
                 fadeOutSpanElement.classList.add('fadeout', 'inline');
