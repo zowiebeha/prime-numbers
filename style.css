@@ -1,3 +1,16 @@
+/* ======
+Variables
+========== */
+
+:root {
+    --black: hsl(40, 100%, 2%);
+    --orange: orange;
+}
+
+/* ======
+Resets
+========== */
+
 * {
     margin: 0;
     padding: 0;
@@ -8,11 +21,6 @@
 *::selection {
     background: var(--orange);
     color: var(--black);
-}
-
-:root {
-    --black: hsl(40, 100%, 2%);
-    --orange: orange;
 }
 
 body {
@@ -37,6 +45,10 @@ main {
     /* width of longest sentence ("This site will generate...") */
     max-width: 42.5rem;
 }
+
+/* ======
+Components
+========== */
 
 .heading {
     color: var(--orange);
@@ -102,6 +114,10 @@ main {
     }
 }
 
+/* ======
+Utilities
+========== */
+
 .mt-1 {
     margin-top: 1rem;
 }
@@ -117,6 +133,10 @@ main {
 .inline {
     display: inline;
 }
+
+/* ======
+Animations
+========== */
 
 @keyframes fade-out {
     from {
